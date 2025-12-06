@@ -1,0 +1,27 @@
+grafana:
+  adminPassword: "marlowe12"
+  service:
+    type: LoadBalancer
+  persistence:
+    enabled: true
+    type: pvc
+    storageClassName: "gp3"  # Keep as gp3 to match existing PVC
+    accessModes:
+      - ReadWriteOnce
+    size: 10Gi
+
+prometheus:
+  prometheusSpec:
+    retention: 10d
+    resources:
+      requests:
+        memory: 1Gi
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: "gp3"  # Keep as gp3 to match existing PVC
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 20Gi

@@ -1,0 +1,42 @@
+replicaCount: 1
+
+image:
+  repository: jlesage/firefox
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 5800
+
+persistence:
+  enabled: true
+  size: 5Gi
+  storageClass: ""
+  accessModes:
+    - ReadWriteOnce
+
+env:
+  TZ: "UTC"
+  USER_ID: "1000"
+  GROUP_ID: "1000"
+  KEEP_APP_RUNNING: "1"
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+  hosts:
+    - host: firefox.local
+      paths:
+        - path: /
+          pathType: Prefix
+  tls: []
+
+resources: {}
+
+affinity: {}
+
+nodeSelector: {}
+
+tolerations: []
