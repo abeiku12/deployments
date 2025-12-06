@@ -15,7 +15,7 @@ spec:
     args: ["sleep 1000"] 
     volumeMounts:
     - mountPath: /cache
-      name: cache-volume    
+      name: cache-volume
   volumes:
   - name: cache-volume
     emptyDir:

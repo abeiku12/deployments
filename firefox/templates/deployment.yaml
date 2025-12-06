@@ -25,10 +25,14 @@ spec:
             - name: {{ $key }}
               value: "{{ $value }}"
             {{- end }}
+          {{- if .Values.persistence.enabled }}
           volumeMounts:
             - name: config
               mountPath: /config
+          {{- end }}
+      {{- if .Values.persistence.enabled }}
       volumes:
         - name: config
           persistentVolumeClaim:
             claimName: {{ include "firefox.fullname" . }}-pvc
+      {{- end }}
